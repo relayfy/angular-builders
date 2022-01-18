@@ -1,1 +1,1 @@
-# @relayfy/angular-localize
+# @relayfy/angular
