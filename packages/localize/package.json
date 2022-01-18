@@ -1,0 +1,10 @@
+{
+  "name": "@relayfy/angular-localize",
+  "version": "1.0.0",
+  "description": "Builder for localization",
+  "builders": "builders.json",
+  "dependencies": {
+    "@angular-devkit/architect": "~0.1301.3",
+    "@angular-devkit/core": "^13.1.3"
+  }
+}

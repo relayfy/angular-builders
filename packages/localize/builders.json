@@ -1,0 +1,9 @@
+{
+  "builders": {
+    "copy": {
+      "implementation": "./dist/angular-localize.js",
+      "schema": "./src/schema.json",
+      "description": "Copies a file."
+    }
+  }
+}
