@@ -1,9 +1,9 @@
 {
   "builders": {
     "merge-i18n": {
-      "implementation": "./src/merge-i18n/merge-i18n.js",
+      "implementation": "./dist/merge-i18n.js",
       "schema": "./src/merge-i18n/schema.json",
-      "description": "Copies a file."
+      "description": "Merge i18n translations"
     }
   }
 }
