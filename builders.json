@@ -1,0 +1,9 @@
+{
+  "builders": {
+    "merge-i18n": {
+      "implementation": "./dist/merge-i18n.js",
+      "schema": "./src/merge-i18n/schema.json",
+      "description": "Merge i18n translations"
+    }
+  }
+}

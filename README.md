@@ -1,1 +1,1 @@
-# @relayfy/angular
+# @relayfy/angular-builders

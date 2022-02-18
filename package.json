@@ -1,0 +1,25 @@
+{
+  "name": "@relayfy/angular-builders",
+  "version": "0.1.0",
+  "description": "Usefull helper functionalities.",
+  "builders": "builders.json",
+  "scripts": {
+    "build": "tsc"
+  },
+  "dependencies": {
+    "@angular-devkit/architect": "~0.1302.4",
+    "@angular-devkit/core": "^13.2.4",
+    "@types/node": "^17.0.18",
+    "chalk": "^4.1.2",
+    "shelljs": "^0.8.5",
+    "xml-js": "^1.6.11"
+  },
+  "devDependencies": {
+    "typescript": "~4.5.5"
+  },
+  "files": [
+    "{dist,src}/**/*.{json,js,d.ts}",
+    "src/schema.json",
+    "builders.json"
+  ]
+}

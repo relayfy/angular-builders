@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es6",
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "outDir": "dist",
+    "declaration": true,
+    "skipLibCheck": true
+  },
+  "files": [
+    "src/merge-i18n/xlf-concat.ts",
+    "src/merge-i18n/xlf-merge.ts",
+    "src/merge-i18n/utils.ts",
+    "src/merge-i18n/merge-i18n.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ],
+  "compileOnSave": false,
+  "buildOnSave": false
+}
