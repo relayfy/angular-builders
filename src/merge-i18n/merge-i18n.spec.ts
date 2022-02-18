@@ -1,7 +1,6 @@
 import { Architect } from '@angular-devkit/architect';
 import { TestingArchitectHost } from '@angular-devkit/architect/testing';
 import { schema } from '@angular-devkit/core';
-import { promises as fs } from 'fs';
 
 describe('Copy File Builder', () => {
   let architect: Architect;

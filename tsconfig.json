@@ -16,11 +16,15 @@
     "strictPropertyInitialization": false,
     "strictNullChecks": false,
     "pretty": true,
+    "outDir": "dist",
     "sourceMap": true,
     "declaration": true,
     "stripInternal": true,
     "skipLibCheck": true
   },
+  "files": [
+    "src/merge-i18n.ts"
+  ],
   "exclude": [
     "node_modules"
   ],
