@@ -50,4 +50,4 @@ angular.json
 
 **Limits**
 
-Currently only the `xliff` format is supported. Others will follow.
+Currently only the `xlf` format is supported. Others will follow.
