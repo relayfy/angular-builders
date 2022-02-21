@@ -13,7 +13,7 @@ Merge-i18n is an extension of the extract-i18n command. It can be used separatel
 **Setup**
 
 angular.json
-```json
+```diff
 {
   ...
   "projects": {
