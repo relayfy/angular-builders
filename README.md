@@ -39,7 +39,7 @@ angular.json
           }
         },
 +        "merge-i18n": {
-+          "builder": "@relayfy/angular-builders:merge-i18n"
++          "builder": "@relayfy/angular-builders:merge-i18n",
 +        },
         ...
       }
@@ -47,6 +47,11 @@ angular.json
   }
 }
 ```
+
+**Options**
+| Option  | Default | Description |
+| ------------- | ------------- | ------------- |
+| preventExtractI18n  | false  | By default, extract-i18n is executed before merge-i18n. You can prevent this with preventExtractI18n = true.  |
 
 **Limits**
 
