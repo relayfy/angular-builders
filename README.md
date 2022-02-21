@@ -7,6 +7,7 @@
 Merge-i18n is an extension of the extract-i18n command. It can be used separately or run extract-i18n as a pre-command.
 
 **Installation**
+
 `npm i @relayfy/angular-builders`
 
 **Setup**
@@ -37,12 +38,16 @@ angular.json
             "format": "xlf"
           }
         },
-++        "merge-i18n": {
-++          "builder": "@relayfy/angular-builders:merge-i18n"
-++        },
++        "merge-i18n": {
++          "builder": "@relayfy/angular-builders:merge-i18n"
++        },
         ...
       }
     }
   }
 }
 ```
+
+**Limits**
+
+Currently only the `xliff` format is supported. Others will follow.
