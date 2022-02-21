@@ -1,6 +1,6 @@
 {
   "name": "@relayfy/angular-builders",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Usefull helper functionalities.",
   "builders": "builders.json",
   "scripts": {
