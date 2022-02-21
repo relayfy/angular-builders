@@ -6,7 +6,7 @@ import { merge } from './xlf-merge';
 import { log } from './utils';
 
 interface Options extends JsonObject {
-  clean: boolean;
+  preventExtractI18n: boolean;
 }
 
 export default createBuilder(copyFileBuilder);
@@ -15,10 +15,7 @@ async function copyFileBuilder(
   options: Options,
   context: BuilderContext,
 ): Promise<BuilderOutput> {
-  log(`extract i18n...`);
-
   const project = context.target?.project || '';
-
   const extractI18nTarget = { target: 'extract-i18n', project };
   const extractI18nOptions = await context.getTargetOptions(extractI18nTarget);
 
@@ -26,14 +23,18 @@ async function copyFileBuilder(
   const outFile = extractI18nOptions.outFile as string;
   const format = extractI18nOptions.format;
 
-  const extractI18nRun = await context.scheduleTarget(extractI18nTarget, { outputPath, format, progress: false });
-  const extractI18nResult = await extractI18nRun.result;
-
-  if (!extractI18nResult.success) {
-    return { success: false, error: `"extract-i18n" failed: ${extractI18nResult.error}` };
+  if (!options?.preventExtractI18n) {
+    log(`extract i18n...`);
+  
+    const extractI18nRun = await context.scheduleTarget(extractI18nTarget, { outputPath, format, progress: false });
+    const extractI18nResult = await extractI18nRun.result;
+  
+    if (!extractI18nResult.success) {
+      return { success: false, error: `"extract-i18n" failed: ${extractI18nResult.error}` };
+    }
+  
+    log(`...extracted i18n successfully`);
   }
-
-  log(`...extracted i18n successfully`);
 
   log(`merge i18n...`);
 
