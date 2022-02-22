@@ -1,6 +1,6 @@
 {
   "name": "@relayfy/angular-builders",
-  "version": "0.3.0-next.0",
+  "version": "0.2.2",
   "description": "Usefull helper functionalities.",
   "builders": "builders.json",
   "scripts": {
@@ -25,5 +25,9 @@
     "{dist,src}/**/*.{json,js,d.ts}",
     "src/schema.json",
     "builders.json"
-  ]
+  ],
+  "engines": {
+    "node": ">=16",
+    "npm": "~8"
+  }
 }
