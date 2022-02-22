@@ -1,8 +1,10 @@
-import { Architect } from '@angular-devkit/architect';
+import { Architect, createBuilder } from '@angular-devkit/architect';
 import { TestingArchitectHost } from '@angular-devkit/architect/testing';
 import { schema } from '@angular-devkit/core';
+import { extractI18nTargetSpec, mergeI18nTargetSpec } from '../testing/test-utils';
+import builder from './merge-i18n';
 
-describe('Copy File Builder', () => {
+describe('Extract-i18n Builder', () => {
   let architect: Architect;
   let architectHost: TestingArchitectHost;
 
@@ -10,34 +12,32 @@ describe('Copy File Builder', () => {
     const registry = new schema.CoreSchemaRegistry();
     registry.addPostTransform(schema.transforms.addUndefinedDefaults);
 
-    // TestingArchitectHost() takes workspace and current directories.
-    // Since we don't use those, both are the same in this case.
-    architectHost = new TestingArchitectHost(__dirname, __dirname);
+    architectHost = new TestingArchitectHost(__dirname);
     architect = new Architect(architectHost, registry);
 
-    // This will either take a Node package name, or a path to the directory
-    // for the package.json file.
-    await architectHost.addBuilderFromPackage('..');
+    await architectHost.addBuilder('@angular-devkit/build-angular:extract-i18n', createBuilder(() => ({ success: true }))); // dummy builder
+    await architectHost.addTarget(extractI18nTargetSpec, '@angular-devkit/build-angular:extract-i18n');
+    await architectHost.addBuilder('@relayfy/angular-builders:merge-i18n', builder);
+    await architectHost.addTarget(mergeI18nTargetSpec, '@relayfy/angular-builders:merge-i18n');
   });
 
-  it('can copy files', async () => {
-    // A "run" can have multiple outputs, and contains progress information.
-    const run = await architect.scheduleBuilder('@example/copy-file:copy', {
-      source: 'package.json',
-      destination: 'package-copy.json',
-    });
-
-    // The "result" member (of type BuilderOutput) is the next output.
-    const output = await run.result;
-
-    // Stop the builder from running. This stops Architect from keeping
-    // the builder-associated states in memory, since builders keep waiting
-    // to be scheduled.
-    await run.stop();
-
-    // Expect that the copied file is the same as its source.
-    const sourceContent = await fs.readFile('package.json', 'utf8');
-    const destinationContent = await fs.readFile('package-copy.json', 'utf8');
-    expect(destinationContent).toBe(sourceContent);
+  it('should do empty test', () => {
+    expect(true).toBeTruthy();
   });
+
+  // it('can merge-i18n xlf', async () => {
+  //   // A "run" can have multiple outputs, and contains progress information.
+  //   const run = await architect.scheduleTarget(mergeI18nTargetSpec, { preventExtractI18n: true });
+
+  //   // The "result" member (of type BuilderOutput) is the next output.
+  //   const output = await run.result;
+
+  //   // Stop the builder from running. This stops Architect from keeping
+  //   // the builder-associated states in memory, since builders keep waiting
+  //   // to be scheduled.
+  //   await run.stop();
+
+  //   // Expect that the copied file is the same as its source.
+  //   //expect(destinationContent).toBe(sourceContent);
+  // });
 });

@@ -1,64 +1,100 @@
+import { XMLParser, XMLBuilder } from 'fast-xml-parser';
+import { log } from './utils';
 import { yellow, red } from 'chalk';
-import { writeFileSync } from 'fs';
-import { js2xml } from 'xml-js';
+import { readFileSync, writeFileSync } from 'fs';
 
-import { cleanup, combine, getFrame, getTransUnits, log, revertTextPlaceholder, uniqueSorted } from './utils';
+const parser = new XMLParser({
+  ignoreAttributes: false,
+  allowBooleanAttributes: true,
+  stopNodes: ['*.source', '*.target']
+});
 
-export function merge(source: string, target: string, targetLanguage: string) {
-    log(`merging ${targetLanguage}`);
-    const newTargetElement = { type: 'element', name: 'target', elements: [ { type: 'text', text: 'NOT_TRANSLATED' } ] };
+const builder = new XMLBuilder({
+  ignoreAttributes: false,
+  format: true,
+  indentBy: '  ',
+  stopNodes: ['*.source', '*.target'],
+  processEntities: false
+});
 
-    const sourceTransUnits = uniqueSorted(getTransUnits(source));
-    const targetTransUnitsObject: any = transUnitsObject(uniqueSorted(getTransUnits(target)));
-    const newTargetTransUnitsObject: any = {};
-
-    for (let i = 0; i < sourceTransUnits.length; i++) {
-        const id = sourceTransUnits[i].attributes.id;
-        const targetElement = targetTransUnitsObject[id] && targetTransUnitsObject[id].elements.find((element: any) => element.name === 'target');
-
-        if (!targetElement) {
-            log(yellow(`Added ${id} for ${targetLanguage}`));
-        }
-
-        // if no target element exists create new one
-        newTargetTransUnitsObject[id] = {
-            ...sourceTransUnits[i],
-            elements: [
-                ...sourceTransUnits[i].elements,
-                targetElement || newTargetElement
-            ]
-        };
-    }
-
-    for (const id of Object.keys(targetTransUnitsObject)) {
-        if (!newTargetTransUnitsObject[id]) {
-            log(red(`Removed ${id} for ${targetLanguage}`));
-        }
-    }
-
-    const frame = getFrame(target);
-    frame.elements[0].elements[0].attributes['target-language'] = targetLanguage;
-
-    const transUnits = cleanup(Object.values(newTargetTransUnitsObject));
-    const result = combine(frame, transUnits);
-
-    const transUnitsXml = js2xml(result, {
-        spaces: 2,
-        fullTagEmptyElement: true,
-        textFn: function(value) {
-            return revertTextPlaceholder(value);
-        }
-    });
-
-    writeFileSync(target, transUnitsXml, 'utf8');
+export const executeXLF = (sourceFile: string, targetFile: string, targetLocale: string) => {
+  const sourceXML = readFileSync(sourceFile, 'utf-8');
+  const targetXML = readFileSync(targetFile, 'utf-8');
+  const mergedTargetXML = merge(sourceXML, targetXML, targetLocale);
+  writeFileSync(targetFile, mergedTargetXML, 'utf-8');
 }
 
-function transUnitsObject(transUnits: any[]) {
-    const transUnitO: any = {};
+export const merge = (sourceXML: string, targetXML: string = '', targetLocale: string): string => {
+  const sourceXMLObj = parser.parse(sourceXML);
+  const targetXMLObj = parser.parse(targetXML);
 
-    for (const transUnit of transUnits) {
-        transUnitO[transUnit.attributes.id] = transUnit;
+  const sourceTransUnits = getTransUnits(sourceXMLObj);
+  const targetTransUnits = getTransUnits(targetXMLObj);
+
+  const mergedTransUnits = mergeTransUnits(sourceTransUnits, targetTransUnits, targetLocale);
+  return builder.build(updateTransUnits(sourceXMLObj, mergedTransUnits, targetLocale));
+}
+
+const mergeTransUnits = (sourceTransUnits: TransUnit[], targetTransUnits: TransUnit[], targetLocale: string) => {
+  const merged = [...(sourceTransUnits || [])]?.map((sourceTransUnit: TransUnit) => {
+    const match = targetTransUnits?.find(targetTransUnit => targetTransUnit['@_id'] === sourceTransUnit['@_id']);
+
+    if (match) {
+      return {
+        '@_id': sourceTransUnit['@_id'],
+        '@_datatype': sourceTransUnit['@_datatype'],
+        source: sourceTransUnit.source,
+        target: match.target,
+        "context-group": sourceTransUnit['context-group']
+      };
+    } else {
+
+      log(yellow(`${sourceTransUnit['@_id']} added for ${targetLocale}`));
+
+      return {
+        '@_id': sourceTransUnit['@_id'],
+        '@_datatype': sourceTransUnit['@_datatype'],
+        source: sourceTransUnit.source,
+        target: 'NOT_TRANSLATED',
+        "context-group": sourceTransUnit['context-group']
+      }
     }
+  });
 
-    return transUnitO;
+  targetTransUnits?.forEach(targetTransUnit => {
+    const removed = !sourceTransUnits?.find(sourceTransUnit => sourceTransUnit['@_id'] === targetTransUnit['@_id']);
+    if (removed) {
+      log(red(`${targetTransUnit['@_id']} removed for ${targetLocale}`));
+    }
+  });
+
+  return merged;
+}
+
+const updateTransUnits = (xmlObj: any, transUnits: TransUnit[], targetLocale: string) => {
+  return {
+    ...xmlObj,
+    xliff: {
+      ...(xmlObj?.xliff || {}),
+      file: {
+        ...(xmlObj?.xliff?.file || {}),
+        '@_target-language': targetLocale,
+        body: {
+          'trans-unit': transUnits
+        }
+      }
+    }
+  };
+}
+
+const getTransUnits = (xmlObj: any): TransUnit[] => {
+  return xmlObj?.xliff?.file?.body?.['trans-unit'];
+}
+
+type TransUnit = {
+  ['@_id']: string;
+  ['@_datatype']: string;
+  source: string;
+  target: string;
+  ['context-group']: any;
 }
