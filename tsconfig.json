@@ -10,8 +10,9 @@
   },
   "files": [
     "src/merge-i18n/merge-i18n.ts",
-    "src/merge-i18n/xlf-merge.ts",
     "src/merge-i18n/utils.ts",
+    "src/merge-i18n/xlf-merge.ts",
+    "src/merge-i18n/xlf2-merge.ts"
   ],
   "exclude": [
     "node_modules"
