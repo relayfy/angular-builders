@@ -10,6 +10,7 @@ Merge-i18n is an extension of the extract-i18n command. It can be used separatel
 
 `npm i @relayfy/angular-builders`
 
+
 **Setup**
 
 angular.json
@@ -48,11 +49,13 @@ angular.json
 }
 ```
 
+
 **Options**
 | Option  | Default | Description |
 | ------------- | ------------- | ------------- |
 | preventExtractI18n  | false  | By default, extract-i18n is executed before merge-i18n. You can prevent this with preventExtractI18n = true.  |
 
+
 **Limits**
 
-Currently only the `xlf` format is supported. Others will follow.
+Currently only the `xlf` and `xlf2` format is supported. Others will follow.

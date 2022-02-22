@@ -1,6 +1,7 @@
 import { BuilderContext, BuilderOutput, createBuilder } from '@angular-devkit/architect';
 import { JsonObject } from '@angular-devkit/core';
 import { executeXLF } from './xlf-merge';
+import { executeXLF2 } from './xlf2-merge';
 import { log } from './utils';
 
 interface Options extends JsonObject {
@@ -19,10 +20,10 @@ async function mergeI18nBuilder(
 
   const outputPath = extractI18nOptions.outputPath as string;
   const outFile = extractI18nOptions.outFile as string;
-  const format = extractI18nOptions.format;
+  const format = extractI18nOptions.format as 'xlf' | 'xlf2';
 
   if (!options?.preventExtractI18n) {
-    log(`extract i18n...`);
+    log(`extract...`);
   
     const extractI18nRun = await context.scheduleTarget(extractI18nTarget, { outputPath, format, progress: false });
     const extractI18nResult = await extractI18nRun.result;
@@ -31,11 +32,11 @@ async function mergeI18nBuilder(
       return { success: false, error: `"extract-i18n" failed: ${extractI18nResult.error}` };
     }
   
-    log(`...extracted i18n successfully`);
+    log(`...extracted successfully`);
   }
 
-  if (format === 'xlf') {
-    log(`merge i18n...`);
+  if (['xlf', 'xlf2'].includes(format)) {
+    log(`merge...`);
     const projectMetadata = await context.getProjectMetadata(project);
     const i18n = projectMetadata.i18n as JsonObject;
     const sourceLocale = i18n?.sourceLocale as string;
@@ -44,12 +45,16 @@ async function mergeI18nBuilder(
     if (locales) {
       Object.keys(locales)?.forEach(locale => {
         const file = locales[locale] as string;
-        log(`merge i18n ${sourceLocale} (${outFile}) with ${locale} (${file})`);
-        executeXLF(outFile, file, locale);
+        log(`merge ${format} - ${locale} (${file}) with ${sourceLocale} (${outFile})`);
+
+        switch(format) {
+          case 'xlf': executeXLF(outFile, file, locale);
+          case 'xlf2': executeXLF2(outFile, file, locale);
+        }
       });
     }
   
-    log('...merged i18n successfully.');
+    log('...merged successfully.');
     return { success: true };
   }
 
