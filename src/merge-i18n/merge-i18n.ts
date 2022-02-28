@@ -48,8 +48,8 @@ async function mergeI18nBuilder(
         log(`merge ${format} - ${locale} (${file}) with ${sourceLocale} (${outFile})`);
 
         switch(format) {
-          case 'xlf': executeXLF(outFile, file, locale);
-          case 'xlf2': executeXLF2(outFile, file, locale);
+          case 'xlf': executeXLF(outFile, file, locale); break;
+          case 'xlf2': executeXLF2(outFile, file, locale); break;
         }
       });
     }

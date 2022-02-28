@@ -45,7 +45,7 @@ const mergeTransUnits = (sourceTransUnits: TransUnit[], targetTransUnits: TransU
         '@_datatype': sourceTransUnit['@_datatype'],
         source: sourceTransUnit.source,
         target: match.target,
-        "context-group": sourceTransUnit['context-group']
+        'context-group': sourceTransUnit['context-group']
       };
     } else {
 
@@ -56,7 +56,7 @@ const mergeTransUnits = (sourceTransUnits: TransUnit[], targetTransUnits: TransU
         '@_datatype': sourceTransUnit['@_datatype'],
         source: sourceTransUnit.source,
         target: 'NOT_TRANSLATED',
-        "context-group": sourceTransUnit['context-group']
+        'context-group': sourceTransUnit['context-group']
       }
     }
   });
