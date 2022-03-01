@@ -3,6 +3,10 @@
   "version": "0.3.1",
   "description": "Usefull helper functionalities.",
   "builders": "builders.json",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/relayfy/angular-builders.git"
+  },
   "scripts": {
     "build": "tsc",
     "test": "jest"
@@ -26,7 +30,6 @@
     "src/schema.json",
     "builders.json"
   ],
-  "repository": "github:relayfy/angular-builders",
   "engines": {
     "node": ">=16",
     "npm": "~8"
