@@ -11,6 +11,14 @@
     "build": "tsc",
     "test": "jest"
   },
+  "keywords": [
+    "angular",
+    "cli builders",
+    "translations",
+    "i18n",
+    "extract-i18n",
+    "merge-i18n"
+  ],
   "dependencies": {
     "@angular-devkit/architect": "~0.1302.4",
     "@angular-devkit/core": "^13.2.4",
