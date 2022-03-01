@@ -26,6 +26,7 @@
     "src/schema.json",
     "builders.json"
   ],
+  "repository": "github:relayfy/angular-builders",
   "engines": {
     "node": ">=16",
     "npm": "~8"
