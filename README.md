@@ -4,6 +4,7 @@
 ![Codecov](https://img.shields.io/codecov/c/gh/relayfy/angular-builders)
 ![npm](https://img.shields.io/npm/dm/@relayfy/angular-builders)
 ![npm version](https://img.shields.io/npm/v/@relayfy/angular-builders)
+![NPM](https://img.shields.io/npm/l/@relayfy/angular-builders)
 
 ## Builders
 ### merge-i18n

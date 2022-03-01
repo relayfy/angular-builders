@@ -3,6 +3,7 @@
   "version": "0.3.1",
   "description": "Usefull helper functionalities.",
   "builders": "builders.json",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/relayfy/angular-builders.git"
