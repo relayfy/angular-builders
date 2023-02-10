@@ -65,7 +65,8 @@ const XLF_TARGET = `<?xml version="1.0" encoding="UTF-8" ?>
 </xliff>
 `;
 
-const XLF_TARGET_RESULT = `<?xml version="1.0" encoding="UTF-8"?><xliff version="2.0" xmlns="urn:oasis:names:tc:xliff:document:2.0" srcLang="en-US" trgLang="de-CH">
+const XLF_TARGET_RESULT = `<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="2.0" xmlns="urn:oasis:names:tc:xliff:document:2.0" srcLang="en-US" trgLang="de-CH">
   <file id="ngi18n" original="ng.template">
     <unit id="ID_1">
       <notes>
@@ -98,7 +99,8 @@ const XLF_TARGET_RESULT = `<?xml version="1.0" encoding="UTF-8"?><xliff version=
 </xliff>
 `;
 
-const XLF_TARGET_EMPTY_RESULT = `<?xml version="1.0" encoding="UTF-8"?><xliff version="2.0" xmlns="urn:oasis:names:tc:xliff:document:2.0" srcLang="en-US" trgLang="de-CH">
+const XLF_TARGET_EMPTY_RESULT = `<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="2.0" xmlns="urn:oasis:names:tc:xliff:document:2.0" srcLang="en-US" trgLang="de-CH">
   <file id="ngi18n" original="ng.template">
     <unit id="ID_1">
       <notes>

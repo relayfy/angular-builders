@@ -36,16 +36,15 @@ angular.json
       "architect": {
         ...
         "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
++          "builder": "@relayfy/angular-builders:merge-i18n",
+-          "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
++            "i18nBuilder": "@angular-devkit/build-angular:extract-i18n",
             "browserTarget": "demo:build",
             "outFile": "src/locale/translations.en-US.xlf",
             "format": "xlf"
           }
         },
-+        "merge-i18n": {
-+          "builder": "@relayfy/angular-builders:merge-i18n",
-+        },
         ...
       }
     }
@@ -57,7 +56,12 @@ angular.json
 **Options**
 | Option  | Default | Description |
 | ------------- | ------------- | ------------- |
-| preventExtractI18n  | false  | By default, extract-i18n is executed before merge-i18n. You can prevent this with preventExtractI18n = true.  |
+| browserTarget       | `undefined`                                  | `inherit` from `extract-i18n`: A browser builder target to extract i18n messages in the format of `project:target[:configuration]`. You can also pass in more than one configuration name as a comma-separated list. Example: `project:target:production,staging`. |
+| format              | `xlf`                                        | `inherit` from `extract-i18n`: Output format for the generated file. |
+| progress            | `true`                                       | `inherit` from `extract-i18n`: By default, extract-i18n is executed before merge-i18n. You can prevent this with preventExtractI18n = true. |
+| outputPath          | `undefined`                                  | `inherit` from `extract-i18n`: Path where output will be placed. |
+| outFile             | `undefined`                                  | `inherit` from `extract-i18n`: Name of the file to output. |
+| i18nBuilder         | `@angular-devkit/build-angular:extract-i18n` | The i18n builder to execute before merge. |
 
 
 **Limits**
