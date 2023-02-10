@@ -59,7 +59,8 @@ const XLF_TARGET = `<?xml version="1.0" encoding="UTF-8" ?>
 </xliff>
 `;
 
-const XLF_TARGET_RESULT = `<?xml version="1.0" encoding="UTF-8"?><xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+const XLF_TARGET_RESULT = `<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
   <file source-language="en-US" datatype="plaintext" original="ng2.template" target-language="de-CH">
     <body>
       <trans-unit id="ID_1" datatype="html">
@@ -91,7 +92,8 @@ const XLF_TARGET_RESULT = `<?xml version="1.0" encoding="UTF-8"?><xliff version=
 </xliff>
 `;
 
-const XLF_TARGET_EMPTY_RESULT = `<?xml version="1.0" encoding="UTF-8"?><xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+const XLF_TARGET_EMPTY_RESULT = `<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
   <file source-language="en-US" datatype="plaintext" original="ng2.template" target-language="de-CH">
     <body>
       <trans-unit id="ID_1" datatype="html">

@@ -1,7 +1,7 @@
 import { Architect, createBuilder } from '@angular-devkit/architect';
 import { TestingArchitectHost } from '@angular-devkit/architect/testing';
 import { schema } from '@angular-devkit/core';
-import { extractI18nTargetSpec, mergeI18nTargetSpec } from '../testing/test-utils';
+import { extractI18nTargetSpec } from '../testing/test-utils';
 import builder from './merge-i18n';
 
 describe('Extract-i18n Builder', () => {
@@ -16,9 +16,8 @@ describe('Extract-i18n Builder', () => {
     architect = new Architect(architectHost, registry);
 
     await architectHost.addBuilder('@angular-devkit/build-angular:extract-i18n', createBuilder(() => ({ success: true }))); // dummy builder
-    await architectHost.addTarget(extractI18nTargetSpec, '@angular-devkit/build-angular:extract-i18n');
     await architectHost.addBuilder('@relayfy/angular-builders:merge-i18n', builder);
-    await architectHost.addTarget(mergeI18nTargetSpec, '@relayfy/angular-builders:merge-i18n');
+    await architectHost.addTarget(extractI18nTargetSpec, '@relayfy/angular-builders:merge-i18n', { browserTarget: '@angular-devkit/build-angular:extract-i18n' });
   });
 
   it('should do empty test', () => {

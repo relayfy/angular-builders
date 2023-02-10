@@ -5,35 +5,44 @@ import { executeXLF2 } from './xlf2-merge';
 import { log } from './utils';
 
 interface Options extends JsonObject {
-  preventExtractI18n: boolean;
+  browserTarget: string;
+  format: 'xlf' | 'xlf2';
+  progress: boolean;
+  outputPath: string;
+  outFile: string;
+  i18nBuilder: string;
 }
 
-export default createBuilder(mergeI18nBuilder);
+const builder: ReturnType<typeof createBuilder> = createBuilder(mergeI18nBuilder);
+export default builder;
 
 async function mergeI18nBuilder(
   options: Options,
   context: BuilderContext,
 ): Promise<BuilderOutput> {
   const project = context.target?.project || '';
-  const extractI18nTarget = { target: 'extract-i18n', project };
-  const extractI18nOptions = await context.getTargetOptions(extractI18nTarget);
+  const format = options.format;
+  const progress = options.progress || false;
+  const outputPath = options.outPath;
+  const outFile = options.outFile;
+  const i18nBuilder = options.i18nBuilder;
 
-  const outputPath = extractI18nOptions.outputPath as string;
-  const outFile = extractI18nOptions.outFile as string;
-  const format = extractI18nOptions.format as 'xlf' | 'xlf2';
+  log(`extract...`);
 
-  if (!options?.preventExtractI18n) {
-    log(`extract...`);
-  
-    const extractI18nRun = await context.scheduleTarget(extractI18nTarget, { outputPath, format, progress: false });
-    const extractI18nResult = await extractI18nRun.result;
-  
-    if (!extractI18nResult.success) {
-      return { success: false, error: `"extract-i18n" failed: ${extractI18nResult.error}` };
-    }
-  
-    log(`...extracted successfully`);
+  const extractI18nRun = await context.scheduleBuilder(i18nBuilder, {
+    browserTarget: options.browserTarget,
+    outputPath,
+    outFile,
+    format,
+    progress
+}, {target: context.target, logger: context.logger.createChild('extract-i18n')});
+  const extractI18nResult = await extractI18nRun.result;
+
+  if (!extractI18nResult.success) {
+    return { success: false, error: `"extract-i18n" failed: ${extractI18nResult.error}` };
   }
+
+  log(`...extracted successfully`);
 
   if (['xlf', 'xlf2'].includes(format)) {
     log(`merge...`);
