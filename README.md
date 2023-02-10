@@ -39,10 +39,10 @@ angular.json
 +          "builder": "@relayfy/angular-builders:merge-i18n",
 -          "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-+            "i18nBuilder": "@angular-devkit/build-angular:extract-i18n",
             "browserTarget": "demo:build",
+            "format": "xlf",
             "outFile": "src/locale/translations.en-US.xlf",
-            "format": "xlf"
++            "i18nBuilder": "@angular-devkit/build-angular:extract-i18n"
           }
         },
         ...

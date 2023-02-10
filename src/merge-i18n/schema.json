@@ -27,8 +27,8 @@
       "type": "string",
       "description": "Name of the file to output."
     },
-    "builderI18n": {
-      "type": "boolean",
+    "i18nBuilder": {
+      "type": "string",
       "default": "@angular-devkit/build-angular:extract-i18n"
     }
   },
