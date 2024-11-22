@@ -5,7 +5,7 @@ import { executeXLF2 } from './xlf2-merge';
 import { log } from './utils';
 
 interface Options extends JsonObject {
-  browserTarget: string;
+  buildTarget: string;
   format: 'xlf' | 'xlf2';
   progress: boolean;
   outputPath: string;
@@ -30,7 +30,7 @@ async function mergeI18nBuilder(
   log(`extract...`);
 
   const extractI18nRun = await context.scheduleBuilder(i18nBuilder, {
-    browserTarget: options.browserTarget,
+    buildTarget: options.buildTarget,
     outputPath,
     outFile,
     format,

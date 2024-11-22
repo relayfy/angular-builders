@@ -17,7 +17,7 @@ describe('Extract-i18n Builder', () => {
 
     await architectHost.addBuilder('@angular-devkit/build-angular:extract-i18n', createBuilder(() => ({ success: true }))); // dummy builder
     await architectHost.addBuilder('@relayfy/angular-builders:merge-i18n', builder);
-    await architectHost.addTarget(extractI18nTargetSpec, '@relayfy/angular-builders:merge-i18n', { browserTarget: '@angular-devkit/build-angular:extract-i18n' });
+    await architectHost.addTarget(extractI18nTargetSpec, '@relayfy/angular-builders:merge-i18n', { buildTarget: '@angular-devkit/build-angular:extract-i18n' });
   });
 
   it('should do empty test', () => {

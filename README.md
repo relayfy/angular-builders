@@ -39,7 +39,7 @@ angular.json
 +          "builder": "@relayfy/angular-builders:merge-i18n",
 -          "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "demo:build",
+            "buildTarget": "demo:build",
             "format": "xlf",
             "outFile": "src/locale/translations.en-US.xlf",
 +            "i18nBuilder": "@angular-devkit/build-angular:extract-i18n"
@@ -56,7 +56,7 @@ angular.json
 **Options**
 | Option  | Default | Description |
 | ------------- | ------------- | ------------- |
-| browserTarget       | `undefined`                                  | `inherit` from `extract-i18n`: A browser builder target to extract i18n messages in the format of `project:target[:configuration]`. You can also pass in more than one configuration name as a comma-separated list. Example: `project:target:production,staging`. |
+| buildTarget       | `undefined`                                  | `inherit` from `extract-i18n`: A browser builder target to extract i18n messages in the format of `project:target[:configuration]`. You can also pass in more than one configuration name as a comma-separated list. Example: `project:target:production,staging`. |
 | format              | `xlf`                                        | `inherit` from `extract-i18n`: Output format for the generated file. |
 | progress            | `true`                                       | `inherit` from `extract-i18n`: By default, extract-i18n is executed before merge-i18n. You can prevent this with preventExtractI18n = true. |
 | outputPath          | `undefined`                                  | `inherit` from `extract-i18n`: Path where output will be placed. |

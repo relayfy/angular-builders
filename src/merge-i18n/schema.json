@@ -3,7 +3,7 @@
   "description": "Extract and merge i18n target options for Build Facade.",
   "type": "object",
   "properties": {
-    "browserTarget": {
+    "buildTarget": {
       "type": "string",
       "description": "A browser builder target to extract i18n messages in the format of `project:target[:configuration]`.",
       "pattern": "^[^:\\s]+:[^:\\s]+(:[^\\s]+)?$"
@@ -32,6 +32,6 @@
       "default": "@angular-devkit/build-angular:extract-i18n"
     }
   },
-  "additionalProperties": true,
-  "required": ["browserTarget"]
+  "additionalProperties": false,
+  "required": ["buildTarget"]
 }
