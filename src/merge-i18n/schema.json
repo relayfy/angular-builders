@@ -5,7 +5,7 @@
   "properties": {
     "browserTarget": {
       "type": "string",
-      "description": "A browser builder target to extract i18n messages in the format of `project:target[:configuration]`. You can also pass in more than one configuration name as a comma-separated list. Example: `project:target:production,staging`.",
+      "description": "A browser builder target to extract i18n messages in the format of `project:target[:configuration]`.",
       "pattern": "^[^:\\s]+:[^:\\s]+(:[^\\s]+)?$"
     },
     "format": {
@@ -32,6 +32,6 @@
       "default": "@angular-devkit/build-angular:extract-i18n"
     }
   },
-  "additionalProperties": false,
+  "additionalProperties": true,
   "required": ["browserTarget"]
 }
