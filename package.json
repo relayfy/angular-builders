@@ -1,6 +1,6 @@
 {
   "name": "@relayfy/angular-builders",
-  "version": "19.0.3",
+  "version": "20.0.0",
   "description": "Usefull helper functionalities.",
   "builders": "builders.json",
   "license": "MIT",
