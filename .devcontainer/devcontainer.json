@@ -4,18 +4,42 @@
   "name": "Node.js & TypeScript",
   // Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
   "image": "mcr.microsoft.com/devcontainers/typescript-node:22-bookworm",
-
+  
   // Features to add to the dev container. More info: https://containers.dev/features.
   // "features": {},
-
+  
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
   // "forwardPorts": [],
-
+  
   // Use 'postCreateCommand' to run commands after the container is created.
-  // "postCreateCommand": "yarn install",
+  "postCreateCommand": "sudo chown -R node:node /workspaces/angular-builders/node_modules && sudo chown -R node:node /workspaces/angular-builders/.angular && sudo chown -R node:node /workspaces/angular-builders/dist && sudo chown -R node:node /workspaces/angular-builders/coverage && sudo chown -R node:node /home/node/.npm && sudo chown -R node:node /home/node/.claude",
 
   // Configure tool-specific properties.
-  // "customizations": {},
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "angular.ng-template",
+        "vivaxy.vscode-conventional-commits",
+        "Anthropic.claude-code"
+      ]
+    }
+  },
+  "mounts": [
+    // Core Volumes
+    "type=volume,source=${devcontainerId}-node_modules,target=/workspaces/angular-builders/node_modules",
+    "type=volume,source=${devcontainerId}-angular-cache,target=/workspaces/angular-builders/.angular",
+    "type=volume,source=${devcontainerId}-dist,target=/workspaces/angular-builders/dist",
+
+    // Test/Coverage
+    "type=volume,source=${devcontainerId}-coverage,target=/workspaces/angular-builders/coverage",
+
+    // npm cache global
+    "type=volume,source=${devcontainerId}-npm-cache,target=/home/node/.npm",
+
+    // Claude Code
+    "type=volume,source=${devcontainerId}-claude-code-bashhistory,target=/commandhistory",
+    "type=volume,source=${devcontainerId}-claude-code-config,target=/home/node/.claude"
+  ],
 
   // Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
   "remoteUser": "node"
