@@ -1,5 +1,5 @@
-import { gray } from 'chalk';
+import { styleText } from 'node:util';
 
 export function log(text: string) {
-  console.log(`${gray('[Merge-i18n]')} ${text}`);
+  console.log(`${styleText('gray', '[Merge-i18n]')} ${text}`);
 }

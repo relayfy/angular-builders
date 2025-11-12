@@ -1,6 +1,6 @@
 import { XMLParser, XMLBuilder } from 'fast-xml-parser';
 import { log } from './utils';
-import { yellow, red } from 'chalk';
+import { styleText } from 'node:util';
 import { readFileSync, writeFileSync } from 'fs';
 
 const parser = new XMLParser({
@@ -49,7 +49,7 @@ const mergeTransUnits = (sourceTransUnits: TransUnit[], targetTransUnits: TransU
       };
     } else {
 
-      log(yellow(`${sourceTransUnit['@_id']} added for ${targetLocale}`));
+      log(styleText('yellow', `${sourceTransUnit['@_id']} added for ${targetLocale}`));
 
       return {
         '@_id': sourceTransUnit['@_id'],
@@ -64,7 +64,7 @@ const mergeTransUnits = (sourceTransUnits: TransUnit[], targetTransUnits: TransU
   targetTransUnits?.forEach(targetTransUnit => {
     const removed = !sourceTransUnits?.find(sourceTransUnit => sourceTransUnit['@_id'] === targetTransUnit['@_id']);
     if (removed) {
-      log(red(`${targetTransUnit['@_id']} removed for ${targetLocale}`));
+      log(styleText('red', `${targetTransUnit['@_id']} removed for ${targetLocale}`));
     }
   });
 
