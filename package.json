@@ -25,7 +25,7 @@
     "@angular-devkit/core": "^20.1.6",
     "@angular-devkit/schematics": "^20.1.6",
     "@types/node": "^24.2.1",
-    "fast-xml-parser": "^5.2.5",
+    "fast-xml-parser": "^5.3.1",
     "shelljs": "^0.10.0"
   },
   "devDependencies": {
