@@ -10,6 +10,8 @@
 ### merge-i18n
 Merge-i18n is an extension of the extract-i18n command. It can be used separately or run extract-i18n as a pre-command.
 
+**Compatibility:** Supports both the new `@angular/build` package and the legacy `@angular-devkit/build-angular` package. The builder auto-detects which build system your project uses.
+
 **Installation**
 
 `npm i @relayfy/angular-builders`
@@ -41,8 +43,8 @@ angular.json
           "options": {
             "buildTarget": "demo:build",
             "format": "xlf",
-            "outFile": "src/locale/translations.en-US.xlf",
-+            "i18nBuilder": "@angular-devkit/build-angular:extract-i18n"
+-            "outFile": "src/locale/translations.en-US.xlf",
++            "outFile": "src/locale/translations.en-US.xlf"
           }
         },
         ...
@@ -51,6 +53,8 @@ angular.json
   }
 }
 ```
+
+**Note:** The `i18nBuilder` option is optional. The builder auto-detects whether to use `@angular/build:extract-i18n` (new build system) or `@angular-devkit/build-angular:extract-i18n` (legacy) based on which packages are available in your project.
 
 
 **Options**
@@ -61,7 +65,7 @@ angular.json
 | progress            | `true`                                       | `inherit` from `extract-i18n`: By default, extract-i18n is executed before merge-i18n. You can prevent this with preventExtractI18n = true. |
 | outputPath          | `undefined`                                  | `inherit` from `extract-i18n`: Path where output will be placed. |
 | outFile             | `undefined`                                  | `inherit` from `extract-i18n`: Name of the file to output. |
-| i18nBuilder         | `@angular-devkit/build-angular:extract-i18n` | The i18n builder to execute before merge. |
+| i18nBuilder         | Auto-detected | The i18n builder to execute before merge. Supports `@angular/build:extract-i18n` (new) and `@angular-devkit/build-angular:extract-i18n` (legacy). If not specified, automatically detects which builder to use based on available packages. |
 
 
 **Limits**

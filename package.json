@@ -38,6 +38,14 @@
   "peerDependencies": {
     "@angular-devkit/build-angular": "^20.1.6"
   },
+  "peerDependenciesMeta": {
+    "@angular-devkit/build-angular": {
+      "optional": true
+    }
+  },
+  "optionalDependencies": {
+    "@angular/build": "^20.1.0"
+  },
   "files": [
     "{dist,src}/**/*.{json,js,d.ts}",
     "src/schema.json",

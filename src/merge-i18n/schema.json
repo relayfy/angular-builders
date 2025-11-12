@@ -29,7 +29,8 @@
     },
     "i18nBuilder": {
       "type": "string",
-      "default": "@angular-devkit/build-angular:extract-i18n"
+      "description": "The i18n builder to execute before merge. Supports both @angular/build:extract-i18n and @angular-devkit/build-angular:extract-i18n. Auto-detects if not specified.",
+      "default": ""
     }
   },
   "additionalProperties": false,
