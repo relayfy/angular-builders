@@ -1,6 +1,6 @@
 {
   "name": "@relayfy/angular-builders",
-  "version": "20.2.0",
+  "version": "21.0.0",
   "description": "Usefull helper functionalities.",
   "builders": "builders.json",
   "license": "MIT",
@@ -21,9 +21,9 @@
     "merge-i18n"
   ],
   "dependencies": {
-    "@angular-devkit/architect": "^0.2003.9",
-    "@angular-devkit/core": "^20.3.9",
-    "@angular-devkit/schematics": "^20.3.9",
+    "@angular-devkit/architect": "^0.2100.0",
+    "@angular-devkit/core": "^21.0.0",
+    "@angular-devkit/schematics": "^21.0.0",
     "@types/node": "^24.10.1",
     "fast-xml-parser": "^5.3.1"
   },
@@ -31,10 +31,10 @@
     "@types/jest": "^29.5.14",
     "jest": "^29.7.0",
     "ts-jest": "^29.4.5",
-    "typescript": "~5.8.0"
+    "typescript": "~5.9.0"
   },
   "peerDependencies": {
-    "@angular-devkit/build-angular": "^20.0.0"
+    "@angular-devkit/build-angular": "^21.0.0"
   },
   "peerDependenciesMeta": {
     "@angular-devkit/build-angular": {
@@ -42,7 +42,7 @@
     }
   },
   "optionalDependencies": {
-    "@angular/build": "^20.0.0"
+    "@angular/build": "^21.0.0"
   },
   "files": [
     "{dist,src}/**/*.{json,js,d.ts}",
