@@ -10,7 +10,9 @@
   },
   "scripts": {
     "build": "tsc",
-    "test": "jest"
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage"
   },
   "keywords": [
     "angular",
@@ -28,10 +30,9 @@
     "fast-xml-parser": "^5.3.1"
   },
   "devDependencies": {
-    "@types/jest": "^29.5.14",
-    "jest": "^29.7.0",
-    "ts-jest": "^29.4.5",
-    "typescript": "~5.9.0"
+    "@vitest/coverage-v8": "^4.0.10",
+    "typescript": "~5.9.0",
+    "vitest": "^4.0.10"
   },
   "peerDependencies": {
     "@angular-devkit/build-angular": "^21.0.0"
