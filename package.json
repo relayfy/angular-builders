@@ -23,9 +23,9 @@
     "merge-i18n"
   ],
   "dependencies": {
-    "@angular-devkit/architect": "^0.2100.0",
-    "@angular-devkit/core": "^21.0.0",
-    "@angular-devkit/schematics": "^21.0.0",
+    "@angular-devkit/architect": "^0.2102.0",
+    "@angular-devkit/core": "^21.2.0",
+    "@angular-devkit/schematics": "^21.2.0",
     "@types/node": "^24.10.1",
     "fast-xml-parser": "^5.3.1"
   },
@@ -35,7 +35,7 @@
     "vitest": "^4.0.10"
   },
   "peerDependencies": {
-    "@angular-devkit/build-angular": "^21.0.0"
+    "@angular-devkit/build-angular": "^21.2.0"
   },
   "peerDependenciesMeta": {
     "@angular-devkit/build-angular": {
@@ -43,7 +43,7 @@
     }
   },
   "optionalDependencies": {
-    "@angular/build": "^21.0.0"
+    "@angular/build": "^21.2.0"
   },
   "files": [
     "{dist,src}/**/*.{json,js,d.ts}",
