@@ -1,10 +1,13 @@
 {
   "compilerOptions": {
     "module": "commonjs",
-    "target": "es6",
+    "target": "es2023",
+    "lib": ["es2023"],
+    "types": ["node"],
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "outDir": "dist",
+    "rootDir": "src/merge-i18n",
     "declaration": true,
     "skipLibCheck": true
   },
